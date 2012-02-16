@@ -23,12 +23,12 @@
 		502798AB14ECD37F00156473 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		502798AC14ECD37F00156473 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		502798AD14ECD37F00156473 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		502798B014ECD37F00156473 /* SceneTester-Info.plist */ = {isa = PBXFileReference; path = "SceneTester-Info.plist"; sourceTree = "<group>"; };
+		502798B014ECD37F00156473 /* SceneTester-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SceneTester-Info.plist"; sourceTree = "<group>"; };
 		502798B214ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		502798B414ECD37F00156473 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		502798B614ECD37F00156473 /* SceneTester-Prefix.pch */ = {isa = PBXFileReference; path = "SceneTester-Prefix.pch"; sourceTree = "<group>"; };
+		502798B614ECD37F00156473 /* SceneTester-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SceneTester-Prefix.pch"; sourceTree = "<group>"; };
 		502798B814ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		502798BA14ECD37F00156473 /* Document.h */ = {isa = PBXFileReference; path = Document.h; sourceTree = "<group>"; };
+		502798BA14ECD37F00156473 /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
 		502798BB14ECD37F00156473 /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		502798BE14ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		502798C114ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };

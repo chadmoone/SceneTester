@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="untitled.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11D50b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Action" parentEntity="SceneElement" syncable="YES"/>
+    <entity name="Character" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="dialogs" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Dialog" inverseName="character" inverseEntity="Dialog" syncable="YES"/>
+    </entity>
+    <entity name="Dialog" parentEntity="SceneElement" syncable="YES">
+        <relationship name="character" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="dialogs" inverseEntity="Character" syncable="YES"/>
+    </entity>
+    <entity name="Location" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="scenes" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="location" inverseEntity="Scene" syncable="YES"/>
+    </entity>
+    <entity name="Scene" syncable="YES">
+        <attribute name="placement" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeOfDay" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="elements" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SceneElement" inverseName="scene" inverseEntity="SceneElement" syncable="YES"/>
+        <relationship name="location" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="scenes" inverseEntity="Location" syncable="YES"/>
+    </entity>
+    <entity name="SceneElement" syncable="YES">
+        <attribute name="ordering" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="scene" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Action" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="Character" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Dialog" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="Location" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Scene" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="SceneElement" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
 </model>
