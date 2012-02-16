@@ -9,6 +9,7 @@
 #import "Document.h"
 
 @implementation Document
+@synthesize characterPanelController;
 
 - (id)init
 {
@@ -31,6 +32,7 @@
 {
     [super windowControllerDidLoadNib:aController];
     // Add any code here that needs to be executed once the windowController has loaded the document's window.
+    NSLog(@"%@", self.managedObjectContext);
 }
 
 + (BOOL)autosavesInPlace
@@ -38,4 +40,8 @@
     return YES;
 }
 
+- (IBAction)openCharacterPanel:(id)sender {
+    [characterPanelController showWindow:sender];
+    characterPanelController.managedObjectContext = self.managedObjectContext;
+}
 @end

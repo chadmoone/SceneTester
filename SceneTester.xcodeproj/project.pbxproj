@@ -15,6 +15,8 @@
 		502798BF14ECD37F00156473 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502798BD14ECD37F00156473 /* Document.xib */; };
 		502798C214ECD37F00156473 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 502798C014ECD37F00156473 /* MainMenu.xib */; };
 		502798C514ECD37F00156473 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 502798C314ECD37F00156473 /* Document.xcdatamodeld */; };
+		505F091814ECE28400B52823 /* ScriptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 505F091714ECE28400B52823 /* ScriptView.m */; };
+		505F091D14ECE6FB00B52823 /* CharacterPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 505F091C14ECE6FB00B52823 /* CharacterPanel.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,9 @@
 		502798BE14ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
 		502798C114ECD37F00156473 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		502798C414ECD37F00156473 /* Document.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Document.xcdatamodel; sourceTree = "<group>"; };
+		505F091614ECE28400B52823 /* ScriptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptView.h; sourceTree = "<group>"; };
+		505F091714ECE28400B52823 /* ScriptView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptView.m; sourceTree = "<group>"; };
+		505F091C14ECE6FB00B52823 /* CharacterPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CharacterPanel.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +97,9 @@
 				502798C014ECD37F00156473 /* MainMenu.xib */,
 				502798C314ECD37F00156473 /* Document.xcdatamodeld */,
 				502798AF14ECD37F00156473 /* Supporting Files */,
+				505F091614ECE28400B52823 /* ScriptView.h */,
+				505F091714ECE28400B52823 /* ScriptView.m */,
+				505F091C14ECE6FB00B52823 /* CharacterPanel.xib */,
 			);
 			path = SceneTester;
 			sourceTree = "<group>";
@@ -163,6 +171,7 @@
 				502798B914ECD37F00156473 /* Credits.rtf in Resources */,
 				502798BF14ECD37F00156473 /* Document.xib in Resources */,
 				502798C214ECD37F00156473 /* MainMenu.xib in Resources */,
+				505F091D14ECE6FB00B52823 /* CharacterPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +185,7 @@
 				502798B514ECD37F00156473 /* main.m in Sources */,
 				502798BC14ECD37F00156473 /* Document.m in Sources */,
 				502798C514ECD37F00156473 /* Document.xcdatamodeld in Sources */,
+				505F091814ECE28400B52823 /* ScriptView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +315,7 @@
 				502798CA14ECD37F00156473 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
