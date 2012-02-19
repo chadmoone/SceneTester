@@ -11,6 +11,10 @@
 @interface ScriptView ()
 - (void)toggleEntryType;
 - (NSDictionary *)attributesForEntryType:(STEntryType)type;
+- (BOOL)atEndOfLine;
+- (BOOL)atStartOfLine;
+- (BOOL)isSelecionEmpty;
+- (BOOL)isCurrentLineEmpty;
 @end
 
 
@@ -140,6 +144,7 @@
             
             font = [fm convertFont:font toHaveTrait:NSBoldFontMask];
             [attr setValue:font forKey:NSFontAttributeName];
+            [attr setValue:@"WILLScene" forKey:@"ObjectType"];
             break;
             
         case STActionEntryType:
@@ -147,7 +152,7 @@
             font = [fm convertFont:font toHaveTrait:NSItalicFontMask];
             [pstyle setFirstLineHeadIndent:23];
             [pstyle setHeadIndent:23];
-            
+            [attr setValue:@"WILLAction" forKey:@"ObjectType"];
             break;
             
         case STCharacterEntryType:
@@ -158,13 +163,14 @@
             [pstyle setFirstLineHeadIndent:33];
             [pstyle setHeadIndent:33];
             [pstyle setParagraphSpacing:0];
-            
+            [attr setValue:@"WILLCharacter" forKey:@"ObjectType"];
             break;
             
         case STDialogEntryType:
             
             [pstyle setFirstLineHeadIndent:33];
             [pstyle setHeadIndent:33];
+            [attr setValue:@"WILLDialog" forKey:@"ObjectType"];
             break;
             
         default:
@@ -187,70 +193,65 @@
     NSMutableString *attrString = [[NSMutableString alloc] init];
     
     for (NSString *key in attrs) {
-        NSLog(@"attribute: %@, value: %@", key, [attrs valueForKey:key]);
+//        NSLog(@"attribute: %@, value: %@", key, [attrs valueForKey:key]);
         [attrString appendFormat:@"%@ : %@  -  ", key, [attrs valueForKey:key]];
     }
     [textView2 setString:attrString];
 }
 
 
-
-
-
-
-
-
-//- (void)textViewDidChangeSelection:(NSNotification *)notification
-//{
-//    NSRange attrRange;
-//    
-//    NSRange sRange = [[[textView selectedRanges] objectAtIndex:0] rangeValue];
-//    NSUInteger length = [textStorage length];
-//    
-//    NSLog(@"selection: %@, length:%lu", NSStringFromRange(sRange), length);
-//    
-//    if (sRange.location > length || length == 0) {
-//        return;
-//    }
-//    if (sRange.location > 0) {     
-//        sRange.location -= 1;
-//    }
-//    
-//    
-//    NSDictionary *attrs = [textStorage attributesAtIndex:sRange.location effectiveRange:&attrRange];
-//    
-//    NSMutableString *attrString = [[NSMutableString alloc] init];
-//    
-//    for (NSString *key in attrs) {
-//        NSLog(@"attribute: %@, value: %@", key, [attrs valueForKey:key]);
-//        [attrString appendFormat:@"%@ : %@  -  ", key, [attrs valueForKey:key]];
-//    }
-//    [textView2 setString:attrString];
-//}
-
-
-
-- (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender
+- (void)textViewDidChangeSelection:(NSNotification *)notification
 {
-    NSPasteboard *pb = [sender draggingPasteboard];
-    NSArray *dTypes = [pb types];
     
-    NSLog(@"%@", NSPasteboardTypePDF);
-    NSLog(@"%@", NSPasteboardTypeColor);
-    NSLog(@"%@", NSPasteboardTypeFindPanelSearchOptions);
-    NSLog(@"HTML - %@", NSPasteboardTypeHTML);
-    NSLog(@"MultipleTextSelection - %@", NSPasteboardTypeMultipleTextSelection);
-    NSLog(@"String - %@", NSPasteboardTypeString);
-    NSLog(@"RTF - %@", NSPasteboardTypeRTF);
-    NSLog(@" -- -- \n");
-    
-    for (int i = 0; i < [dTypes count]; i++) {
-        NSLog(@"%@", [dTypes objectAtIndex:i]);
-        
-        NSLog(@"%@", [pb propertyListForType:[dTypes objectAtIndex:i]]);
-    }
-    
-    return NSDragOperationCopy;
+    NSLog(@"isSelectionEmpty: %d", self.isSelecionEmpty);
+    NSLog(@"iscurrentLineEmpty: %d", self.isCurrentLineEmpty);
+    NSLog(@"atStartOfLine: %d", self.atStartOfLine);
+    NSLog(@"atEndOfLine: %d", self.atEndOfLine);
 }
+
+
+- (BOOL)isSelecionEmpty
+{
+    return [textView selectedRange].length < 1;
+}
+
+- (BOOL)atEndOfLine
+{
+    NSRange selectedRange = [textView selectedRange];
+    NSUInteger lineStart;
+    NSUInteger lineEnd;
+    NSUInteger contentsEnd;
+    
+    [[textStorage string] getLineStart:&lineStart end:&lineEnd contentsEnd:&contentsEnd forRange:selectedRange];
+    
+    return selectedRange.location == lineEnd;
+}
+
+
+- (BOOL)atStartOfLine
+{
+    NSRange selectedRange = [textView selectedRange];
+    NSUInteger lineStart;
+    NSUInteger lineEnd;
+    NSUInteger contentsEnd;
+    
+    [[textStorage string] getLineStart:&lineStart end:&lineEnd contentsEnd:&contentsEnd forRange:selectedRange];
+    
+    return selectedRange.location == lineStart;
+}
+
+- (BOOL)isCurrentLineEmpty
+{
+    NSRange selectedRange = [textView selectedRange];
+    NSUInteger lineStart;
+    NSUInteger lineEnd;
+    NSUInteger contentsEnd;
+    
+    [[textStorage string] getLineStart:&lineStart end:&lineEnd contentsEnd:&contentsEnd forRange:selectedRange];
+    
+    return (lineEnd - lineStart) < 1;
+}
+
+
 
 @end
