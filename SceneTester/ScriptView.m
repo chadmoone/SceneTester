@@ -15,6 +15,7 @@
 - (BOOL)atStartOfLine;
 - (BOOL)isSelecionEmpty;
 - (BOOL)isCurrentLineEmpty;
+- (STEntryType)previousLineEntryType;
 @end
 
 
@@ -77,10 +78,14 @@
 {
 //    NSLog(@"selector: %@", NSStringFromSelector(commandSelector));
     
-    if (commandSelector == @selector(insertTab:) ||
-        commandSelector == @selector(insertNewline:)) {
+    if (commandSelector == @selector(insertTab:)) {
         
         [self insertTab:tView];
+        return YES;
+    }
+    
+    if (commandSelector == @selector(insertNewline:)) {
+        [self insertNewline:tView];
         return YES;
     }
     
@@ -89,15 +94,55 @@
 
 - (void)insertTab:(id)sender
 {
-    NSLog(@"tab inserted by %@", sender);
+    NSLog(@"--TAB");
     
-    NSInteger ipoint = [[[textView selectedRanges] objectAtIndex:0] rangeValue].location;
-    
-    unichar newPChar = NSParagraphSeparatorCharacter;
-    [[textStorage mutableString] insertString:[NSString stringWithCharacters:&newPChar length:1] atIndex:ipoint];
+    // TAB is used to toggle entry modes
+    // Entry mode can only be toggled when on a new and empty line
+    if (!self.isSelecionEmpty || !self.isCurrentLineEmpty) {
+        NSLog(@"    do nothing");
+        return;
+    }
     
     [self toggleEntryType];
 }
+
+
+- (void)insertNewline:(id)sender
+{
+    NSLog(@"--ENTER");
+    
+    // ENTER is used to create a new element
+    // This can only be done at the end of a non-empty line.
+    if (self.isCurrentLineEmpty || !self.atEndOfLine) {
+        NSLog(@"    do nothing");
+        return;
+    }
+    
+    NSInteger ipoint = [textView selectedRange].location;
+    unichar newPChar = NSParagraphSeparatorCharacter;
+    [[textStorage mutableString] insertString:[NSString stringWithCharacters:&newPChar length:1] atIndex:ipoint];
+    
+    switch (currentEntryType) {
+        case STSceneEntryType:
+            currentEntryType = STActionEntryType;
+            break;
+        
+        case STActionEntryType:
+            currentEntryType = STActionEntryType;
+            break;
+        
+        case STCharacterEntryType:
+            currentEntryType = STDialogEntryType;
+            break;
+        
+        case STDialogEntryType:
+            currentEntryType = STActionEntryType;
+            break;
+    }
+    
+    [textView setTypingAttributes:[self attributesForEntryType:currentEntryType]];
+}
+
 
 - (void)toggleEntryType
 {
@@ -202,11 +247,12 @@
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification
 {
-    
     NSLog(@"isSelectionEmpty: %d", self.isSelecionEmpty);
     NSLog(@"iscurrentLineEmpty: %d", self.isCurrentLineEmpty);
     NSLog(@"atStartOfLine: %d", self.atStartOfLine);
     NSLog(@"atEndOfLine: %d", self.atEndOfLine);
+    
+    
 }
 
 
@@ -250,6 +296,44 @@
     [[textStorage string] getLineStart:&lineStart end:&lineEnd contentsEnd:&contentsEnd forRange:selectedRange];
     
     return (lineEnd - lineStart) < 1;
+}
+
+- (STEntryType)previousLineEntryType
+{
+    NSRange selectedRange = [textView selectedRange];
+    NSUInteger lineStart;
+    NSUInteger lineEnd;
+    NSUInteger contentsEnd;
+    
+    [[textStorage string] getLineStart:&lineStart end:&lineEnd contentsEnd:&contentsEnd forRange:selectedRange];
+    
+    if (lineStart == 0) {
+        return STSceneEntryType;
+    }
+    
+    NSRange attrRange;
+    NSParagraphStyle *pstyle = [textStorage attribute:NSParagraphStyleAttributeName 
+                                              atIndex:(lineStart - 1)
+                                       effectiveRange:&attrRange];
+    
+    if (pstyle && [pstyle valueForKey:@"ObjectType"]) {
+        NSString *eType = [pstyle valueForKey:@"ObjectType"];
+        
+        if ([eType isEqualTo:@"WILLScene"]) {
+            return STSceneEntryType;
+        }
+        else if ([eType isEqualTo:@"WILLAction"]) {
+            return STActionEntryType;
+        }
+        else if ([eType isEqualTo:@"WILLCharacter"]) {
+            return STCharacterEntryType;
+        }
+        else if ([eType isEqualTo:@"WILLDialog"]) {
+            return STDialogEntryType;
+        }
+    }
+    
+    return STSceneEntryType;
 }
 
 
