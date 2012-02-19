@@ -8,10 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ScriptView : NSView
+
+typedef enum entryTypes {
+    STSceneEntryType = 0,
+    STActionEntryType = 1,
+    STCharacterEntryType = 2,
+    STDialogEntryType = 3
+    } STEntryType;
+
+@interface ScriptView : NSView <NSTextViewDelegate>
 
 
-@property (strong) IBOutlet NSArrayController *elementsAC;
+@property (strong) IBOutlet NSArrayController *charactersAC;
+@property (strong) IBOutlet NSArrayController *locationsAC;
 @property (strong) IBOutlet NSObjectController *sceneOC;
+@property (strong) IBOutlet NSArrayController *dialogsAC;
+@property (strong) IBOutlet NSArrayController *actionsAC;
 
 @end

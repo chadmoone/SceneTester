@@ -7,10 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CharacterPanelViewController.h"
 
 @interface Document : NSPersistentDocument
-- (IBAction)openCharacterPanel:(id)sender;
-@property (strong) IBOutlet CharacterPanelViewController *characterPanelController;
 
 @end

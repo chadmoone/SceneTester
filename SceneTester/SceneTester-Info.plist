@@ -98,6 +98,6 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>SceneApp</string>
+	<string>NSApplication</string>
 </dict>
 </plist>

@@ -8,14 +8,14 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "SceneTester/Document.h"
-         timestampString = "351107003.141978"
+         filePath = "SceneTester/ScriptView.m"
+         timestampString = "351329582.035821"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
-         landmarkName = "characterPanelController"
-         landmarkType = "19">
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "@implementation ScriptView"
+         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
